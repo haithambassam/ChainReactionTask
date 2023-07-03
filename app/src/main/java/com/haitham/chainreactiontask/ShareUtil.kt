@@ -5,35 +5,16 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
-import androidx.annotation.DrawableRes
+import androidx.fragment.app.Fragment
+import com.facebook.share.model.ShareLinkContent
+import com.facebook.share.widget.ShareDialog
 
 
-fun Context.shareOnFacebook( title: String, content: String) {
-    val intent = Intent()
-    intent.action = Intent.ACTION_SEND
-    intent.setPackage("com.facebook.katana")
-
-    intent.putExtra(Intent.EXTRA_TITLE, title)
-    intent.putExtra(Intent.EXTRA_TEXT, content)
-    intent.type = "text/plain"
-
-    try {
-        // Start the specific social application
-        startActivity(intent)
-    } catch (ex: ActivityNotFoundException) {
-        // The application does not exist
-        Toast.makeText(this, "app have not been installed.", Toast.LENGTH_SHORT).show()
-    }
-}
-
-
-fun Context.shareOnInstagram(@DrawableRes image: Int, content: String) {
-    val imageUri = Uri.parse("android.resource://$packageManager/$image")
+fun Fragment.shareOnInstagram(content: String) {
 
 
     val intent = Intent(Intent.ACTION_SEND)
-    intent.type = "image/*"
-    intent.putExtra(Intent.EXTRA_STREAM, imageUri)
+    intent.type = "text/plain"
     intent.putExtra(Intent.EXTRA_TEXT, content)
     intent.setPackage("com.instagram.android")
 
@@ -42,6 +23,22 @@ fun Context.shareOnInstagram(@DrawableRes image: Int, content: String) {
         startActivity(intent)
     } catch (ex: ActivityNotFoundException) {
         // The application does not exist
-        Toast.makeText(this, "app have not been installed.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, "app have not been installed.", Toast.LENGTH_SHORT).show()
     }
+}
+
+
+fun Fragment.shareFacebook(content:String) {
+    val shareDialog = ShareDialog(this)
+    if (ShareDialog.canShow(ShareLinkContent::class.java)) {
+        val linkContent = ShareLinkContent.Builder()
+            .setQuote(content)
+            .setContentUrl(Uri.parse("https://api.alquran.cloud/v1/sajda/ar.asad"))
+            .build()
+
+        shareDialog.show(linkContent)
+    } else {
+        Toast.makeText(activity, "Cannot share content to Facebook", Toast.LENGTH_SHORT).show()
+    }
+
 }

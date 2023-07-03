@@ -1,4 +1,5 @@
 <resources>
+    <string translatable="false" name="facebook_app_id">286921680487543</string>
     <string name="app_name">ChainReactionTask</string>
     <string name="no_data_has_been_collected_label">No data has been collected</string>
     <string name="surah_name_label">Surah Name:</string>

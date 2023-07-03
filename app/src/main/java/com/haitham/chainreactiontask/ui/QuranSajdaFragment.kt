@@ -1,17 +1,14 @@
 package com.haitham.chainreactiontask.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.haitham.chainreactiontask.R
+import com.haitham.chainreactiontask.*
 import com.haitham.chainreactiontask.databinding.FragmentQuranSajdaBinding
-import com.haitham.chainreactiontask.shareOnFacebook
-import com.haitham.chainreactiontask.shareOnInstagram
 import com.haitham.chainreactiontask.ui.data.SharePlatforms
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,10 +23,10 @@ class QuranSajdaFragment : Fragment() {
     private val quranSajdaRVAdapter: QuranSajdaRVAdapter = QuranSajdaRVAdapter { sharePlatform, aya ->
         when (sharePlatform) {
             is SharePlatforms.Facebook -> {
-                context?.shareOnFacebook(aya.surah.name, "${aya.text} \n  number = ${aya.surah.number}")
+                shareFacebook("${aya.text} \n  number = ${aya.surah.number}")
             }
             is SharePlatforms.Instagram -> {
-                context?.shareOnInstagram(R.drawable.ic_book, "${aya.text} \n  number = ${aya.surah.number}")
+                shareOnInstagram( "${aya.text} \n  number = ${aya.surah.number}")
             }
         }
     }
