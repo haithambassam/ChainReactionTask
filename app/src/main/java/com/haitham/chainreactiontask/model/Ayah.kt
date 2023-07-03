@@ -1,4 +1,4 @@
-package com.haitham.project.model
+package com.haitham.chainreactiontask.model
 
 import com.haitham.chainreactiontask.model.Sajda
 import com.haitham.chainreactiontask.model.Surah

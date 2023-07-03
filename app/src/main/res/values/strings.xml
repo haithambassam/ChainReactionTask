@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">ChainReactionTask</string>
+    <string name="no_data_has_been_collected_label">No data has been collected</string>
+    <string name="surah_name_label">Surah Name:</string>
+    <string name="aya_number_label">aya number:</string>
 </resources>
